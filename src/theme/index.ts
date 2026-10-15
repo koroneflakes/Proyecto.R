@@ -3,6 +3,7 @@ import { typography } from "./typography";
 
 export { colors } from "./colors";
 export { fontFamilies, typography } from "./typography";
+export { getMagicHomeSizing, getUiScale, scaleUiValue } from "./ui-scale";
 
 export const theme = {
   colors,
