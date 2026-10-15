@@ -1,0 +1,77 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+@import "nativewind/theme";
+
+@theme {
+  --font-display: "Gambarino";
+  --font-body: "System";
+
+  --color-background: #f7f2ed;
+  --color-surface: #fbf7ef;
+  --color-ink: #1d1a17;
+  --color-ink-soft: #5d564e;
+
+  --color-terracota: #c4573f;
+  --color-musgo: #5c8a5e;
+  --color-lago: #4b7f9c;
+  --color-ocre: #d8a23e;
+
+  --color-arcilla: #f0cfc2;
+  --color-salvia: #cfddc4;
+  --color-bruma: #cbdde6;
+  --color-miel: #f3dda8;
+
+  --color-crema: #fbf7ef;
+  --color-arena: #efe4d0;
+  --color-piedra: #8a7a66;
+  --color-tierra: #3e3226;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #f7f2ed;
+    color: #1d1a17;
+    font-family: "System", sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Gambarino";
+  }
+
+  .font-body {
+    font-family: "System";
+  }
+
+  .text-ink {
+    color: #1d1a17;
+  }
+
+  .text-muted {
+    color: #5d564e;
+  }
+
+  .bg-terracota { background-color: #c4573f; }
+  .bg-musgo { background-color: #5c8a5e; }
+  .bg-lago { background-color: #4b7f9c; }
+  .bg-ocre { background-color: #d8a23e; }
+  .bg-arcilla { background-color: #f0cfc2; }
+  .bg-salvia { background-color: #cfddc4; }
+  .bg-bruma { background-color: #cbdde6; }
+  .bg-miel { background-color: #f3dda8; }
+  .bg-crema { background-color: #fbf7ef; }
+  .bg-arena { background-color: #efe4d0; }
+  .bg-piedra { background-color: #8a7a66; }
+  .bg-tierra { background-color: #3e3226; }
+  .bg-surface { background-color: #fbf7ef; }
+}
