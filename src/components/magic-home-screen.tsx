@@ -8,6 +8,7 @@ import {
   type GestureResponderEvent,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   cancelAnimation,
@@ -420,11 +421,6 @@ export function MagicHomeScreen() {
     cleanupTimers.current.add(timer);
   };
 
-  const bottomInset = Math.max(
-    insets.bottom + sizing.interaction.bottomInset,
-    height * 0.134
-  );
-
   return (
     <View className="relative flex-1 overflow-hidden bg-noche">
       <StatusBar hidden />
@@ -667,108 +663,40 @@ export function MagicHomeScreen() {
       ))}
 
       <View
-        className="absolute z-30 flex-row items-end justify-between"
+        className="absolute z-30 flex-col items-center"
         style={{
           left: footer.sideInset,
           right: footer.sideInset,
-          bottom: bottomInset,
-          gap: footer.gap,
+          bottom: insets.bottom + sizing.interaction.bottomInset,
         }}
       >
         <View
-          className="flex-none border border-white/20 bg-black/55"
-          style={{
-            width: footer.inspirationWidth,
-            maxWidth: footer.inspirationMaxWidth,
-            borderRadius: footer.inspirationRadius,
-            borderWidth: footer.cardBorderWidth,
-            paddingHorizontal: footer.horizontalPadding,
-            paddingVertical: footer.verticalPadding,
-          }}
+          className="w-full flex-row items-end justify-between"
+          style={{ gap: footer.gap, marginBottom: footer.gap }}
         >
-          <Text
-            numberOfLines={1}
-            adjustsFontSizeToFit
-            minimumFontScale={0.8}
-            className="font-body font-bold uppercase text-dorado-claro/80"
-            style={{
-              fontSize: footer.caption,
-              letterSpacing: footer.captionTracking,
-            }}
-            maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
-          >
-            Proyecto.R
-          </Text>
           <View
-            className="flex-row items-center"
+            className="flex-none border border-white/20 bg-black/55"
             style={{
-              marginTop: footer.contentTopGap,
-              gap: footer.contentGap,
+              width: footer.inspirationWidth,
+              maxWidth: footer.inspirationMaxWidth,
+              borderRadius: footer.inspirationRadius,
+              borderWidth: footer.cardBorderWidth,
+              paddingHorizontal: footer.horizontalPadding,
+              paddingVertical: footer.verticalPadding,
             }}
-          >
-            <Text
-              accessible={false}
-              className="font-display text-dorado"
-              style={{ fontSize: footer.inspirationIcon }}
-              maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
-            >
-              ✹
-            </Text>
-            <Text
-              numberOfLines={2}
-              adjustsFontSizeToFit
-              minimumFontScale={0.8}
-              className="font-display text-dorado-claro"
-              style={{ fontSize: footer.inspirationText, flexShrink: 1 }}
-              maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
-            >
-              Roxy uwu
-            </Text>
-          </View>
-        </View>
-
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={`Pip Pip: ${creations}. Tocar para animar el contador`}
-          onPress={bumpCounter}
-          pressRetentionOffset={sizing.interaction.pressRetention}
-          className="flex-none border-dorado bg-naranja"
-          style={({ pressed }) => ({
-            width: footer.creationsWidth,
-            minWidth: footer.creationsMinWidth,
-            minHeight: 48,
-            maxWidth: footer.creationsMaxWidth,
-            borderRadius: footer.outerRadius,
-            borderWidth: footer.outerBorderWidth,
-            padding: footer.outerPadding,
-            opacity: pressed ? 0.88 : 1,
-          })}
-        >
-          <Animated.View
-            className="items-center border border-dorado/30 bg-panel"
-            style={[
-              counterStyle,
-              {
-                borderRadius: footer.innerRadius,
-                borderWidth: footer.innerBorderWidth,
-                paddingHorizontal: footer.counterHorizontalPadding,
-                paddingVertical: footer.counterVerticalPadding,
-                boxShadow: `0 ${footer.shadowVertical}px ${footer.shadowBlur}px rgba(245,158,11,0.4)`,
-              },
-            ]}
           >
             <Text
               numberOfLines={1}
               adjustsFontSizeToFit
               minimumFontScale={0.8}
-              className="font-body font-bold uppercase text-dorado"
+              className="font-body font-bold uppercase text-dorado-claro/80"
               style={{
-                fontSize: footer.counterCaption,
-                letterSpacing: footer.counterCaptionTracking,
+                fontSize: footer.caption,
+                letterSpacing: footer.captionTracking,
               }}
               maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
             >
-              Pip Pip
+              Proyecto.R
             </Text>
             <View
               className="flex-row items-center"
@@ -779,30 +707,113 @@ export function MagicHomeScreen() {
             >
               <Text
                 accessible={false}
-                className="font-body text-dorado"
-                style={{ fontSize: footer.counterIcon }}
+                className="font-display text-dorado"
+                style={{ fontSize: footer.inspirationIcon }}
                 maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
               >
-                😭
+                ✹
               </Text>
-              <Animated.Text
-                accessibilityLiveRegion="polite"
+              <Text
+                numberOfLines={2}
+                adjustsFontSizeToFit
+                minimumFontScale={0.8}
                 className="font-display text-dorado-claro"
-                style={[
-                  countStyle,
-                  {
-                    fontSize: footer.counterValue,
-                    fontVariant: ["tabular-nums"],
-                    textShadowColor: colors.dorado,
-                    textShadowRadius: footer.counterShadow,
-                  },
-                ]}
+                style={{ fontSize: footer.inspirationText, flexShrink: 1 }}
                 maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
               >
-                {creations}
-              </Animated.Text>
+                Roxy uwu
+              </Text>
             </View>
-          </Animated.View>
+          </View>
+
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={`Pip Pip: ${creations}. Tocar para animar el contador`}
+            onPress={bumpCounter}
+            pressRetentionOffset={sizing.interaction.pressRetention}
+            className="flex-none border-dorado bg-naranja"
+            style={({ pressed }) => ({
+              width: footer.creationsWidth,
+              minWidth: footer.creationsMinWidth,
+              minHeight: 48,
+              maxWidth: footer.creationsMaxWidth,
+              borderRadius: footer.outerRadius,
+              borderWidth: footer.outerBorderWidth,
+              padding: footer.outerPadding,
+              opacity: pressed ? 0.88 : 1,
+            })}
+          >
+            <Animated.View
+              className="items-center border border-dorado/30 bg-panel"
+              style={[
+                counterStyle,
+                {
+                  borderRadius: footer.innerRadius,
+                  borderWidth: footer.innerBorderWidth,
+                  paddingHorizontal: footer.counterHorizontalPadding,
+                  paddingVertical: footer.counterVerticalPadding,
+                  boxShadow: `0 ${footer.shadowVertical}px ${footer.shadowBlur}px rgba(245,158,11,0.4)`,
+                },
+              ]}
+            >
+              <Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                minimumFontScale={0.8}
+                className="font-body font-bold uppercase text-dorado"
+                style={{
+                  fontSize: footer.counterCaption,
+                  letterSpacing: footer.counterCaptionTracking,
+                }}
+                maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
+              >
+                Pip Pip
+              </Text>
+              <View
+                className="flex-row items-center"
+                style={{
+                  marginTop: footer.contentTopGap,
+                  gap: footer.contentGap,
+                }}
+              >
+                <Text
+                  accessible={false}
+                  className="font-body text-dorado"
+                  style={{ fontSize: footer.counterIcon }}
+                  maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
+                >
+                  😭
+                </Text>
+                <Animated.Text
+                  accessibilityLiveRegion="polite"
+                  className="font-display text-dorado-claro"
+                  style={[
+                    countStyle,
+                    {
+                      fontSize: footer.counterValue,
+                      fontVariant: ["tabular-nums"],
+                      textShadowColor: colors.dorado,
+                      textShadowRadius: footer.counterShadow,
+                    },
+                  ]}
+                  maxFontSizeMultiplier={sizing.maxFontSizeMultiplier}
+                >
+                  {creations}
+                </Animated.Text>
+              </View>
+            </Animated.View>
+          </Pressable>
+        </View>
+
+        <Pressable
+          accessibilityRole="button"
+          className="self-center rounded-full border border-white/50 bg-[#6e3df1] px-6 py-3"
+          onPress={() => router.push("/sign-up")}
+          style={({ pressed }) => ({ opacity: pressed ? 0.82 : 1 })}
+        >
+          <Text className="font-body text-[14px] font-semibold text-white">
+            Comenzar
+          </Text>
         </Pressable>
       </View>
     </View>
