@@ -36,11 +36,19 @@
       "expo-video",
       "expo-secure-store",
       [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Permite usar tu ubicación para sugerir las coordenadas de una locación."
+        }
+      ],
+      [
         "@clerk/expo",
         {
           "appleSignIn": false
         }
-      ]
+      ],
+      "expo-sqlite",
+      "@maplibre/maplibre-react-native"
     ],
     "experiments": {
       "typedRoutes": true,
