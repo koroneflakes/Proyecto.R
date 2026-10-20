@@ -375,7 +375,7 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
 
       setVerificationVisible(false);
       Keyboard.dismiss();
-      router.replace("/");
+      router.replace("/(tabs)");
       return true;
     } catch (error) {
       setAuthError(getCaughtAuthErrorMessage(error));
@@ -395,7 +395,7 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
         await startSSOFlow({ strategy });
 
       if (createdSessionId) {
-        router.replace("/");
+        router.replace("/sso-callback");
         return;
       }
 

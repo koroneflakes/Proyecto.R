@@ -807,6 +807,7 @@ export function MagicHomeScreen() {
 
         <Pressable
           accessibilityRole="button"
+          accessibilityLabel="Crear una cuenta"
           className="self-center rounded-full border border-white/50 bg-[#6e3df1] px-6 py-3"
           onPress={() => router.push("/sign-up")}
           style={({ pressed }) => ({ opacity: pressed ? 0.82 : 1 })}

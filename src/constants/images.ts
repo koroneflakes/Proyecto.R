@@ -6,4 +6,10 @@ export const images = {
   mascot,
   roxyBackground,
   registrationAnimation,
+  // PLACEHOLDER: Replace these fixed-seed images with dedicated vein artwork.
+  veinCovers: {
+    artifice: { uri: "https://picsum.photos/seed/artifice/336/168" },
+    merchant: { uri: "https://picsum.photos/seed/merchant/336/168" },
+    collector: { uri: "https://picsum.photos/seed/collector/336/168" },
+  },
 };
